@@ -1,16 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
-import csv
+import pandas as pd
 
-csv = "journals.csv"
+csv = pd.read_csv("journals.csv")
 
-url = "https://sju.primo.exlibrisgroup.com/discovery/search?query=any,contains,Advances%20in%20Quantitative%20Analysis%20of%20Finance%20and%20Accounting&tab=Everything&search_scope=MyInst_and_CI&vid=01USCIPH_INST:SJU&offset=0"
+journal_list = []
+journal_list = csv['Journal'].tolist()
 
-page = requests.get(url)
+print(journal_list)
+class Scraper():
+    def formatjournal(journal):
+        # Change journal format to add %20 in between each space
+        formattedjournal = str(journal).replace(" ", "%20")
+        return formattedjournal
+    def query():
+        url = "https://sju.primo.exlibrisgroup.com/discovery/search?query=any,contains," + formattedjournal + "&tab=Everything&search_scope=MyInst_and_CI&vid=01USCIPH_INST:SJU&offset=0"
+        page = requests.get(url)
 
-soup = BeautifulSoup(page.content, "html.parser")
-
-print(soup)
-
-print(page.text)
-
+s = Scraper()
+for i in range(len(journal_list)):
+    s.formatjournal(journal_list[i])
+    print(formattedjournal)
