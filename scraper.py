@@ -10,7 +10,7 @@ page = requests.get(url)
 
 soup = BeautifulSoup(page.content, "html.parser")
 
-#print(soup)
+print(soup)
 
 print(page.text)
 
